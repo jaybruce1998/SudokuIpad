@@ -1,11 +1,3 @@
-//
-//  SudokuDLX.swift
-//  Sudoku
-//
-//  Created by Ji Won Lee on 11/2/25.
-//
-
-
 import Foundation
 
 final class SudokuDLX {
