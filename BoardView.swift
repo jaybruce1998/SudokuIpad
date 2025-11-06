@@ -12,6 +12,7 @@ class BoardView: UIView {
     var showMistakes: Bool = true
     var singleColorCells: Bool = true
     var mistakesCurrent: Int32 = 0
+    private var d: Int = 0
     
     private var undoStack: [BoardState] = []
     var onBoardChanged: (() -> Void)? = nil
@@ -88,6 +89,11 @@ class BoardView: UIView {
         undoStack.append(boardState.deepCopy())
     }
     
+    func setSelectedNumber(n: Int)
+    {
+        d = n - 1
+    }
+    
     // MARK: - Input Handling
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: self)
@@ -110,24 +116,9 @@ class BoardView: UIView {
             return
         }
         
-        // Determine candidate index in 3x3 subcell
-        let localX = location.x - CGFloat(col) * cellSize
-        let localY = location.y - CGFloat(row) * cellSize
-        let subCellW = cellSize / 3
-        let subCellH = cellSize / 3
-        let sc = min(Int(localX / subCellW), 2)
-        let sr = min(Int(localY / subCellH), 2)
-        let d = sr * 3 + sc
-        
-        let hasCandidate = boardState.cand[row][col][d]
-        
         switch inputMode {
         case .value:
-            if hasCandidate {
-                setValue(row: row, col: col, value: d + 1)
-            } else {
-                toggleCandidate(row: row, col: col, index: d)
-            }
+            setValue(row: row, col: col, value: d + 1)
         case .toggle:
             toggleCandidate(row: row, col: col, index: d)
         case .color:

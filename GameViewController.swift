@@ -113,6 +113,8 @@ class GameViewController: UIViewController {
         }
         controlPanel.onSetColor = { [weak self] color in self?.boardView.setSelectedColor(color) }
         
+        controlPanel.onSetNumber = { [weak self] n in self?.boardView.setSelectedNumber(n: n) }
+        
         // Ensure mistakes update whenever the board changes
         boardView.onBoardChanged = { [weak self] in
             guard let self = self else { return }
