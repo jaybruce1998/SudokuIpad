@@ -42,7 +42,7 @@ final class Sudoku {
     /// Difficulty: 0 = easy, 1 = medium, 2 = hard, 3 = extreme
     convenience init(difficulty d: Int) {
         self.init(ind: [])
-        var filled = Array(repeating: Array(repeating: false, count: 9), count: 9)
+        var filled = Array(repeating: Array(repeating: true, count: 9), count: 9)
 
         if d == 0 {
             // Easy: remove cells randomly but keep solvable
